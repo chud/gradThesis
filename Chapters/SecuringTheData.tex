@@ -19,6 +19,8 @@ During the lifetime of a message, \autoref{fig:messageLifetimeOverviewDiagram} i
 
 \section{Transmission}
 Securing the transmission is divided into two phases. The first phase provides authentication. The outcome of the first phase is the production of a session key. The second phase is the secure transmission of the data confidentially. 
+We make use for TLS / SSL for the transmission. TLS / SSL a standarized protocol which will be familar to most readers as it is most often used in securing HTTP. (Browsers reference secured resources with the https protocol identifier.) HTTPS in the browser is, again, most often used to authenticate a server to a browser. This type one way authentication can be augmented with client side authentication. Authentication of both the client and the server is known as mutual authentication.  
+
 \subsection{Certificate Mutual Authentication}
 \subsubsection{Phase 1}
 In phase one we use x.509 certificates as a means of authenticating the origin of the data.
@@ -54,9 +56,11 @@ The outcome of this first phase is the production of a session key. Using certif
 \subsection{Secure Communication}
 \subsubsection{Phase 2}
 The symmetric session key from phase one is now used as a ‘master session key’ from which each transaction will derive an individual key. The use of session keys provides confidentially during transmission. The master key is used to create session keys which also affords us forward secrecy.  
+
 \subsection{Message Security}
-Securing the payload of the message is the first action that occurs when we secure the data.  
+The first step in securiting the messsage is securing the payload. 
 At this point, the security properties of confidentiality, integrity, and availability are provided.
+
 \section{Message Lifecycle}
 The message is instantiated upon the arrival of an event from the node’s input tendril.  The event is recorded in the message payload and a message authentication code (MAC) is applied. The resulting data and MAC are concatenated to produce a record (rx).  \\
 $data + MAC = r{_n}$

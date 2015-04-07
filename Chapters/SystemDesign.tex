@@ -79,9 +79,10 @@ Requirements for our solution are securing the information at the time of collec
 
 The message format is composed of the payload, and a hash message authentication code (HMAC). For the event data we look inside the payload. It contains the timestamp, ids for both the tendril and the node, and the event data itself. The event carries two fields within it didn’t type and it’s content.  To manage the data on the remote we designed process that begins with an input at the tendril. The element manager through either polling or an event will signal the node to create a message. The node then takes this event data and formats it into a message. The message format contains a hash of the payload (HMAC), which provides data integrity. (detailed below) Encryption with a shared key provides the confidentiality. Our process of key management, which is discussed below, handles origin integrity, nonrepudiation or authentication.   Once even has been processed into a message and secure, it is handed off to the transition component where it will either be transmitted immediately or store on the remote node.
 
-\subsection{Digital Signature}
+\subsection{Digital Signature Algorithm}
 The format supports the integrity property by default. As mentioned above, Integrity is maintained by use of a message authentication code (MAC) on the payload data. A hashed MAC (HMAC) employing SHA-2 is chosen in order to avoid known hash collision exploits found in other hashing algorithms. \cite{Turner:MiRyW-r_} 
-Encryption 
+
+\subsection{Encryption Algorithm}
 Encryption is centered on the public/private key pair created and stored at install time of the node. A 1024k bit RSA algorithm is used to generate both a server and a node key pair. 
 
 The shared key is used to generate a message specific key that in turn is used to encrypt the payload of the message. The server side of the system uses the same shared key to generate the message key. This provides the benefit of the shared key never being transmitted on the network. This property of key hiding is a key feature in defending against eavesdropping based attacks.
@@ -93,24 +94,24 @@ Certificates provide proof of server identity to each node and the presence of t
 The manner in which the certificates are distributed to the server and remotes protects us from imposter attacks on both sides of the transmission. This is discussed further in the threat analysis section. 
   The public keys embedded in the certificates are used to authenticate the server and remote to each other. 
 
-\subsection{MESSAGE HANDLING}
+\subsection{Message Handling}
   Messages are secured as the node generates them. We ensure message integrity, authentication, confidentiality and availability through the following steps. (non-reputability, origin integrity, and sender integrity provided during the transfer phase.) 
 
   1.  The node detects an event on a connected tendril.
   2.  A message is created from the event with the event properties. (see Figure ‘Interface Events’ )
-  3.  The message and the node’s private key ( ) is used to create a digital signature.
-  4.  The message and the digital signature are concatenated to form  .
-  5.    is encrypted with the server’s public key to produce  .
-  6.    is stored to the node’s local storage.
+  3.  The message and the node’s private key ( $k_{pub}$ ) is used to create a digital signature.
+  4.  The message and the digital signature are concatenated to form $m_{signed}$ .
+  5.  $m_{signed}$ is encrypted with the server’s public key to produce $E$ .
+  6.  $E$  is stored to the node’s local storage.
    
    Figure 4.3 - Interface Events
-   Message Components
+\subsection{Message Components}
    Nodes use the transmission link to send data messages to the server. The most efficient means of communication is when the remote has a direct connection to the server. Direct connect is characterized as a state where the node can open a TCP socket to the server. Having a direct connection, confidentiality, integrity and non-repudiation are provided via a combination of SSL/TLS, HMAC, and Digital Certificate that we detail below.
     
     Figure 4.4 - Interface Messages
-    In the case that the connection to the data center is not available or intermittent / degraded connectivity places the system in ‘store and forward’ mode. 
-    When the link is down the messages are stored on the node in a FIFO message queue (there their signed and encrypted format). As many messages are held as possible. The number that can be held in memory is dependent open two resources, the amount of storage and the amount of RAM on the node.
-    Encryption is required on all message transmission to and from the nodes. The node use symmetric, shared key encryption protocols to reduce processing resource requirements and minimize time spent handling messages. 
+In the case that the connection to the data center is not available or intermittent / degraded connectivity places the system in ‘store and forward’ mode. 
+When the link is down the messages are stored on the node in a FIFO message queue (there their signed and encrypted format). As many messages are held as possible. The number that can be held in memory is dependent open two resources, the amount of storage and the amount of RAM on the node.
+Encryption is required on all message transmission to and from the nodes. The node use symmetric, shared key encryption protocols to reduce processing resource requirements and minimize time spent handling messages. 
 
 \section{System Initialization}
     As part of the project client-side and server-side certificate key management are investigated as well as various key exchange and data channel encryption methods. Threats to the security of the system are key to this design. The defenses against those threats are analyzed below.
