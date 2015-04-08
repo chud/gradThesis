@@ -42,7 +42,8 @@ Below is a list of steps for mutual authentication diagrammed in \autoref{fig:mu
 $c=E{_B{_{priv}}}$
 \item The node sends its own certificate $B{_{cert}}$  to the server concatenated with the cyphertext.  \\$B{_{cert}} + c$
 \item The server uses the node’s public key, $B{_{pub}}$ , to decrypt the cyphertext and produce its own copy of message $m'$\\$m'=D{_B{_{pub}}}(c)$
-\item The server compares $m′$ with the message $m$ that it had sent previously. If $m'$ is equal to $m$ the session moves on to RSA key agreement negotiation. \\ $if (m == m')$
+\item The server compares $m′$ with the message $m$ that it had sent previously. If $m'$ is equal to $m$ the session moves on to RSA key agreement. \\ $if (m == m')$
+\item The key agreement negotiation results in a session key. $k{_session}$ 
 \end{enumerate}
  
 \begin{figure}
@@ -52,7 +53,10 @@ $c=E{_B{_{priv}}}$
     \label{fig:mutualAuthenticationMessages}
 \end{figure}
 
-The outcome of this first phase is the production of a session key. Using certificates, a chain of trust is established which is used to provide origin integrity for an asymmetric (public/private) key pair. These asymmetric keys contained in the certificates are used to verify the identity of the opposite end of the connection and then, once identity has been confirmed, those keys are used in key agreement to establish a session key. \cite{Rescorla:2000tv}, \cite{Viega:2002wt}, \cite{Oppliger:2014wm}
+The outcome of this first phase is the production of a session key. Using certificates, a chain of trust is established which is used to provide origin integrity for an asymmetric (public/private) key pair. 
+These asymmetric keys contained in the certificates are used to verify the identity of the opposite end of the connection and then, once identity has been confirmed, those keys are used in key agreement to establish a session key. 
+\cite{Rescorla:2000tv}, \cite{Viega:2002wt}, \cite{Oppliger:2014wm}
+
 \subsection{Secure Communication}
 \subsubsection{Phase 2}
 The symmetric session key from phase one is now used as a ‘master session key’ from which each transaction will derive an individual key. The use of session keys provides confidentially during transmission. The master key is used to create session keys which also affords us forward secrecy.  

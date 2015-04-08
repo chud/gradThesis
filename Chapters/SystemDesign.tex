@@ -141,6 +141,7 @@ Encryption is required on all message transmission to and from the nodes. The no
       Delete  DELETE  Idempotent
 
 
+
 \subsubsection{Safe and Idempotent}
       REST and the HTTP verbs used in this system participate in two properties. The methods apply to some methods but not others.  The property ‘Safe’ ensures that the action provides a resource in response and the action must not have any side effects. This also means that the action, when applied to the resource, leaves the resource in as the same state as it was in before the action.  Multiple read calls using will return same resource state.  
       The Idempotent property of an action guarantees that a resource will end in the same state over multiple calls. For example, calling ‘create’ on a single resource results on only one instance of the resource being create.  Just as calling update multiple times on a given resource with the same attributes will result in the resource being set to the same state as calling the action once.  The HTTP ‘GET’ verb is of particular importance as it is the only action that is both ‘safe’ and ‘idempotent’.  
