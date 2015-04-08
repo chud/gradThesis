@@ -133,12 +133,21 @@ The manner in which the certificates are distributed to the server and remotes p
      Create, Read, Update and, Delete.  
      “The World Wide Web, where HTTP [5] is the uniform interface. HTTP defines the verbs GET, PUT, DELETE, POST, PATCH [4], OPTIONS and HEAD.” 
       The REST methods are mapped to a corresponding HTTP verb.  \cite{Fielding:2000dd}
-      REST Method HTTP Verb Safe / Idempotent
-      Create  POST  Idempotent
-      Read  GET Safe and Idempotent
-      Update  PUT Idempotent
-      Delete  DELETE  Idempotent
 
+\begin{table}[ ]
+\centering
+\begin{tabular}{c|c|c}
+ \bf REST Method & \bf HTTP Verb & \bf Safe / Idempotent \\
+ \hline
+      Create&  POST&  Idempotent\\
+      Read & GET& Safe and Idempotent\\
+      Update&  PUT& Idempotent\\
+      Delete&  DELETE&  Idempotent\\
+ \hline
+\end{tabular}
+\caption{REST Method - HTTP Verb Mapping}
+\label{tab:restMapping}
+\end{table}
 
 \subsubsection{Safe and Idempotent}
       REST and the HTTP verbs used in this system participate in two properties. The methods apply to some methods but not others.  The property ‘Safe’ ensures that the action provides a resource in response and the action must not have any side effects. This also means that the action, when applied to the resource, leaves the resource in as the same state as it was in before the action.  Multiple read calls using will return same resource state.  
@@ -147,7 +156,7 @@ The manner in which the certificates are distributed to the server and remotes p
        Values are passed in the request for ‘create’, ‘update’ and ‘delete’ actions.  They are typically passed initial values such as a name and its relation to other resources or in the case of a delete, an identifying attribute.  REST uses the HTTP verb ‘POST’ to create new resources.  
        Example REST routes
         
-        Figure 4.6 - REST routes and actions for the node resource
+        \autoref{tab:restMapping} - REST routes and actions for the node resource
 \subsection{JSON}
         The REST methods defined the action on a resource, however we need to be able to pass attributes to the resource. To this end we selected JSON (JavaScript Object Notation){Bray:1aMFfDtC} JSON has the benefits of being human readable and well supported. Many libraries and languages exist to parse it. In our case, the Ruby libraries we use are conveniently built into our basic client / server install.  
 
