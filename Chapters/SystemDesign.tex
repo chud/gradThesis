@@ -129,7 +129,7 @@ Encryption is required on all message transmission to and from the nodes. The no
      On top of HTTP we employ the REST (REpresentative State Transfer) protocol. \cite{Fielding:2000dd}  In brief REST allows us to use the standard HTTP subcommands or ‘verbs’ ‘GET’, ‘POST, ‘PUT’, ‘PATCH’ and ‘DELETE’ to manipulate elements of the system and treat all those elements as resources. 
 \subsection{REST AS A SUBSTRATE}
      As a brief introduction to REST it helps to point out the pieces of the HTTP protocol of specific interest. We also lightly cover the relationship between REST over HTTP, and our use of TLS/SSL.   
-     The Transport Layer Security / Secure Socket Layer is a security layer protocol “… used for encapsulation of various higher level protocols.”{dierks:wd}  In our case  we use TLS to secure out HTTP connections. \cite{Rescorla:2000tv}.  This provides, confidentiality, integrity and authentication for our messages during transmission. 
+     The Transport Layer Security / Secure Socket Layer is a security layer protocol “… used for encapsulation of various higher level protocols.”\cite{dierks:wd}  In our case  we use TLS to secure out HTTP connections. \cite{Rescorla:2000tv}.  This provides, confidentiality, integrity and authentication for our messages during transmission. 
      The REST protocol, now secured via TLS, incorporates the concept of a resource and actions upon those resources. REST provides four actions we will use.  Those are ‘Create’, ‘Read’, ‘Update’, and ‘Delete’.  
      Create, Read, Update and, Delete.  
      “The World Wide Web, where HTTP [5] is the uniform interface. HTTP defines the verbs GET, PUT, DELETE, POST, PATCH [4], OPTIONS and HEAD.” 
@@ -151,7 +151,7 @@ Encryption is required on all message transmission to and from the nodes. The no
         
         Figure 4.6 - REST routes and actions for the node resource
 \subsection{JSON}
-        The REST methods defined the action on a resource, however we need to be able to pass attributes to the resource. To this end we selected JSON (JavaScript Object Notation){Bray:1aMFfDtC} JSON has the benefits of being human readable and well supported. Many libraries and languages exist to parse it. In our case, the Ruby libraries we use are conveniently built into our basic client / server install.  
+        The REST methods defined the action on a resource, however we need to be able to pass attributes to the resource. To this end we selected JSON (JavaScript Object Notation)\cite{Bray:1aMFfDtC} JSON has the benefits of being human readable and well supported. Many libraries and languages exist to parse it. In our case, the Ruby libraries we use are conveniently built into our basic client / server install.  
 
 
 
