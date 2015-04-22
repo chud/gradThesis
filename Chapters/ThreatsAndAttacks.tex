@@ -1,4 +1,9 @@
 \chapter{Threats and Attacks}
+
+The system as defined above addresses areas of potential security attacks. Nine of these exploits are attempted and analyzed during the implementation. It is possible for one of the threats to be present in more than one component of the system. For instance a man in the middle attack can be launched on the transmission component as well as against the node. We consider each a separate attack vector and worthy of specific analysis.
+The node is the point of entry for events into the system. Once injected, that data record is secured for its lifetime in the system. A specific challenge will be the property of availability as a constant communication link (or backhaul) may not always be available. The effect of intermittent connectivity is that the data storage and processing subsystem will not always be reachable. 
+ In order to make use of the data collected on the remote, there must exist a communication channel between the remote and storage components (referred to as the backhaul going forward). We will discuss the characteristics of this channel broadly. The security of the data being passed must be maintained regardless of the quality of the link. Security properties must be independent of the reliability, bandwidth, delay or other characteristics of the link. In addition, the system must allow for the communication channel to change path and topology without effect to the security of the service. This research addresses methods for protecting against attacks such as Man in the middle attacks, traffic snooping, service impersonation and others.
+
 \section{Exploit List}
 
 \begin{table}[ ]
@@ -6,14 +11,15 @@
 \begin{tabular}{c|c|c|c}
  \bf Exploit & \bf Node & \bf Transmission & \bf Tested\\
  \hline
-      Poodle                  &  - &  X & -                \\
-      Poodle TLS              &  - &  X & -            \\
-      Poodle SHA1 deprication &  X &  X & -\\
-      Read & GET& Safe and Idempotent\\
-      Update&  PUT& Idempotent\\
-      Delete&  DELETE&  Idempotent\\
+      Heartbleed              &  - &  X & -\\
+      Poodle                  &  - &  X & -\\
+      Poodle TLS              &  - &  X & -\\
+      SHA1 deprication        &  X &  X & -\\
+      Man in the Middle       &  - &  X & -\\
+      Replay                  &  - &  X & -\\
+      Stream Cipher Attack    &  - &  X & -\\
  \hline
 \end{tabular}
-\caption{REST Method - HTTP Verb Mapping}
-\label{tab:restMapping}
+\caption{Exploits}
+\label{tab:exploits}
 \end{table}
